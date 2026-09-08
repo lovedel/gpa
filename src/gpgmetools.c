@@ -122,8 +122,7 @@ gpa_gpgme_new (void)
   if (gpg_err_code (err) != GPG_ERR_NO_ERROR)
     gpa_gpgme_error (err);
 
-  if (! cms_hack)
-    gpgme_set_passphrase_cb (ctx, gpa_passphrase_cb, NULL);
+  /* Note: passphrase callback handled by gpg-agent in gpgme 2.x */
 
   return ctx;
 }

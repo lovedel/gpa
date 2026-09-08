@@ -170,15 +170,8 @@ gpa_context_init (GpaContext *context)
       return;
     }
 
-  /* Set the appropriate callbacks.  Note that we can't set the
-     passphrase callback in CMS mode because it is not implemented by
-     the CMS backend.  To make things easier we never set in CMS mode
-     because we can then assume that a proper GnuPG-2 system (with
-     pinentry) is in use and then we don't need that callback for
-     OpenPGP either. */
-  if (!cms_hack)
-    gpgme_set_passphrase_cb (context->ctx, gpa_context_passphrase_cb, context);
-  gpgme_set_progress_cb (context->ctx, gpa_context_progress_cb, context);
+  /* Note: passphrase and progress callbacks handled by gpg-agent in gpgme 2.x */
+
   /* Fill the CB structure */
   context->io_cbs = g_malloc (sizeof (struct gpgme_io_cbs));
   context->io_cbs->add = gpa_context_register_cb;
