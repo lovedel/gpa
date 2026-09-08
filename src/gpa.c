@@ -307,7 +307,22 @@ gpa_open_cardmanager (GSimpleAction *simple, GVariant *parameter, gpointer user_
 void
 gpa_open_settings_dialog (GSimpleAction *simple, GVariant *parameter, gpointer user_data)
 {
-  settings_dlg_new (user_data);
+  GtkWindow *parent_window = NULL;
+  GtkWidget *window = NULL;
+
+  /* Try to get the active window as parent to avoid GTK warnings */
+  if (gpa_application)
+    {
+      GList *windows = gtk_application_get_windows (gpa_application);
+      if (windows)
+        parent_window = GTK_WINDOW (windows->data);
+    }
+
+  /* If user_data was passed and looks like a window, use it instead */
+  if (user_data && GTK_IS_WINDOW (user_data))
+    parent_window = GTK_WINDOW (user_data);
+
+  settings_dlg_new (GTK_WIDGET (parent_window));
 }
 
 

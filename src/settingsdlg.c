@@ -1036,8 +1036,8 @@ settings_dlg_get_type (void)
 void
 settings_dlg_new (GtkWidget *parent)
 {
-  if (parent)
-    g_return_if_fail (GTK_IS_WINDOW (parent));
+  if (parent && !GTK_IS_WINDOW (parent))
+    parent = NULL;
 
   if (!the_settings_dialog)
     {
