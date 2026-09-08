@@ -10,7 +10,7 @@ depends=('gpgme' 'gtk3')
 makedepends=('git' 'glib2-devel' 'libgpg-error')
 provides=('gpa')
 conflicts=('gpa')
-source=('gpa::git+https://github.com/lovedel/gpa.git')
+source=('gpa-git::git+https://github.com/lovedel/gpa.git')
 sha256sums=('SKIP')
 
 pkgver() {
